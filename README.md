@@ -26,7 +26,6 @@ It does the following
     -I have encountered the new mechs in the campaign contracts
     -I have been able to salvage them - I haven't collected a full mech yet
 
-I will refine the UI to allow you to pick your mechdef folder and mdd location in the future, but for now I want to make sure you don't accidentally overwrite your game data until you are sure you have a backup.
-Edit: I added a better UI/progress bar as well as directories for your file locations.  You can change them by either editing the textbox or for a permanent change - edit the .config file and change the two directories at the bottom of the file.
-Edit 2: I was able to add all of JK_Varients(https://www.nexusmods.com/battletech/mods/18) into the DB (I had to fix the json on one of the vindicators).  I am able to load my save and get into the campaign.  I'll play some now (for testing... ) to see if any of the new ones show up. Also, I had to reorder the csv entries (MoveDefs before Chassis before MechDefs) to get the game to load.
+
+I was able to add all of JK_Varients(https://www.nexusmods.com/battletech/mods/18) into the DB (I had to fix the json on one of the vindicators).  I am able to load my save and get into the campaign.  I'll play some now (for testing... ) to see if any of the new ones show up. Also, I had to reorder the csv entries (MoveDefs before Chassis before MechDefs) to get the game to load.
 Next up will be some more UI changes.
