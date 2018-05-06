@@ -1,11 +1,16 @@
-I've created a .net tool (BMIT - BattleTech Metadatabase Import Tool) that reads the json mechdef files and updates the db.  Mainly because i wanted to add new varients to the db and didn't want to type it all in manually.  This is so your custom mechs/variants will show up in the campaign.
-You must make sure the csv contains your mechdefs and that they are properly formed (make sure they work in skirmish mode).
+BMIT - BattleTech Metadatabase Import Tool
+
+This is a tool that reads the json mechdef files and updates the db.  This is to allow you to use custom mechs in the campaign.  If properly tagged they will show up as enemies during random contracts.
+
+NOTE: You must make sure the csv contains your mechdefs and that they are properly formed (make sure they work in skirmish mode). Make sure they are working as you intend by testing them in Skirmish mode before attempting to import them using this tool.  
+
 This is very much an alpha/test release to see if it can handle various mechdefs.
-It should do either - create a new entry if one is not found (using the ID in the UnitDef table)
-or if it does find one, it should update that one with your files info.
+
+It will both create new mech records or update existing mech records if one already exists for that mech id.
+
 It does the following
 
-    It checks to see if there's a TagSetID for this mechDef ID.  If not, it creates a new one.  If so, it grabs that one.
+    It checks to see if there's a TagSetID for this mechDef ID.  If not, it creates a new one.  If so, it grabs the existing one.
     It creates or updates the UnitDef table using the values from the JSON.  This will allow you to change the values by changing the json and then running the update.
     It creates or updates the TagSetTag table.  If you remove MechTags from the JSON they will be removed from the db as well.
 
