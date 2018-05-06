@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -20,14 +21,26 @@ namespace BTMechDBUpdater
         public Form1()
         {
             InitializeComponent();
+            txtPath.Text = ConfigurationManager.AppSettings["DefaultMechDir"];
+            txtMDD.Text = ConfigurationManager.AppSettings["DefaultMDDir"];
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            foreach (var f in Directory.GetFiles("C:\\Development\\Brandon\\btmods\\BTMechDBUpdater\\BTMechDBUpdater\\test\\mechs"))
+            var files = Directory.GetFiles("C:\\Development\\Brandon\\btmods\\BTMechDBUpdater\\BTMechDBUpdater\\test\\mechs");
+            progressBar1.Minimum = 0;
+            progressBar1.Maximum = files.Length;
+            progressBar1.Value = 0;
+
+            Application.DoEvents();
+
+            foreach (var f in files)
             {
                 var mechdef = LoadMechDef(f);
                 UpdateDB(mechdef);
+                progressBar1.Value++;
+                Application.DoEvents();
             }
         }
 
