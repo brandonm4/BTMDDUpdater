@@ -11,14 +11,11 @@ It does the following
 
     -Download from GitHub - https://github.com/brandonm4/BTMDDUpdater/releases/tag/v.01a
     -Put all the mechdefs you want to update or import into one folder.
-    -Copy your MetadataDatabase.db to the \test\ folder in the tool folder
     -Run the tool
+	--Go to Settings tab
     --Change the first box (MechDefs Path) to point to the folder where you copied all your files.
-    --Ignore the second box it's not implemented yet - the db path is hardcoded to the BMIT\test subfolder.
-    -Press the GO button.  Wait for it to say complete.
-    -Now to copy the modified db back to your game
-    --Backup your original game folder MetadataDatabase.db
-    --Copy the modified MetadataDatabase.db from the \test\ folder back to your originalgames mdd folder.
+    --Change the second to point to your MetadataDatabase.md file. (In your games MDD folder).  It will make a backup before making any changes.
+    -Go to Basic Tab. Press the Start Import button.  Wait for it to say complete. (at bottom)           
     --See if it worked and didn't blow up
     -i have been able to load an existing game save (created on an unmodded game)
     -I have encountered the new mechs in the campaign contracts
