@@ -17,6 +17,7 @@ namespace BTMechDBUpdater
     public partial class Form1 : Form
     {
 
+        private BMIT.DatabaseTools.MDData mdData;
 
         public Form1()
         {
@@ -40,6 +41,10 @@ namespace BTMechDBUpdater
 
             this.Text = "BMIT - Version " + major + "." + minor + "." + build;
 
+#if DEBUG
+            txtMDD.Text = @"C:/Development/Brandon/btmods/BTMechDBUpdater/BTMechDBUpdater/test/MetadataDatabase.db";
+            txtPath.Text = @"C:/Development/Brandon/btmods/BTMechDBUpdater/BTMechDBUpdater/test/mechs";
+#endif
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -185,27 +190,29 @@ namespace BTMechDBUpdater
             {
                 File.Copy(txtMDD.Text, txtMDD.Text + "-Backup-" + DateTime.Now.ToString("yyyyMMddhhmmss.bak"), false);
             }
-
+            mdData = new BMIT.DatabaseTools.MDData(txtMDD.Text);
             Application.DoEvents();
 
-            using (SqliteConnection db = new SqliteConnection("Filename=" + txtMDD.Text))
+            //using (SqliteConnection db = new SqliteConnection("Filename=" + txtMDD.Text))
             {
-                db.Open();
+               // db.Open();
 
                 foreach (var f in files)
                 {
                     if (f.EndsWith("json"))
                     {
                         var mechdef = LoadMechDef(f);
-                        UpdateDB(mechdef, db);
+                        //UpdateDB(mechdef, db);
+                        mdData.UpdateUnitDefs(mechdef, 1);
                     }
                     toolStripProgressBar1.Value++;
                     Application.DoEvents();
                 }
 
-                db.Close();
+                //db.Close();
             }
 
+            mdData = null;
 
             toolStripStatusLabel1.Text = "Complete";
 
