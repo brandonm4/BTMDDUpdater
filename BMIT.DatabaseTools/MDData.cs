@@ -89,7 +89,7 @@ namespace BMIT.DatabaseTools
             string tagSetID = "";
             using (var checkcmd = db.CreateCommand())
             {
-                checkcmd.CommandText = "Select * from UnitDef where UnitDefid = '" + lanceDef["Description"]["Id"] + "'";
+                checkcmd.CommandText = "Select * from LanceDef where LanceDefid = '" + lanceDef["Description"]["Id"] + "'";
                 checkcmd.Transaction = trans;
                 using (var query = checkcmd.ExecuteReader())
                 {
