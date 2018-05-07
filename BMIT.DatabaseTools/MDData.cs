@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace BMIT.DatabaseTools
 {
-    public class MDData
+    public class MDData : IDisposable
     {
         public MDData(string pathToMdd)
         {
             db = new SqliteConnection("Filename=" + pathToMdd);
             db.Open();
         }
-        ~MDData()
-        {
-            try { db.Close(); } catch { }
-        }
+        //~MDData()
+        //{
+        //    try { db.Close(); } catch { }
+        //}
         private static SqliteConnection db;
 
         public void UpdateUnitDefs(Newtonsoft.Json.Linq.JObject unitDef, int defType = 1)
@@ -57,6 +57,11 @@ namespace BMIT.DatabaseTools
                 cmd1 = new SqliteCommand(" INSERT INTO TagSetTag('TagSetID','TagName') VALUES ('" + tagSetID + "', '" + tag.ToString() + "')", db);
                 cmd1.ExecuteReader();
             }            
+        }
+
+        public void Dispose()
+        {
+            try { db.Close(); } catch { }
         }
     }
 }
