@@ -85,7 +85,40 @@ namespace BMIT.DatabaseTools
         /* Placeholder functions for now */
         public void UpdateLanceDefs(Newtonsoft.Json.Linq.JObject lanceDef)
         {
-            throw new NotImplementedException();
+            SqliteTransaction trans = db.BeginTransaction();
+            string tagSetID = "";
+            using (var checkcmd = db.CreateCommand())
+            {
+                checkcmd.CommandText = "Select * from UnitDef where UnitDefid = '" + lanceDef["Description"]["Id"] + "'";
+                checkcmd.Transaction = trans;
+                using (var query = checkcmd.ExecuteReader())
+                {
+                    if (query.HasRows)
+                    {
+                        // Do an update
+                        query.Read();
+                        tagSetID = query.GetString(4);
+                    }
+                    else
+                    {
+                        // Do an insert
+                        tagSetID = Guid.NewGuid().ToString();
+                        using (var cmd = db.CreateCommand())
+                        {
+                            cmd.Transaction = trans;
+                            cmd.CommandText = "INSERT INTO TagSet('TagSetID','TagSetTypeID') VALUES ('" + tagSetID.ToString() + "'," + ((int)TagSetType.LanceDef).ToString() + ")";
+                            cmd.ExecuteNonQuery();
+                        }                                                  
+                    }
+                }
+
+
+            }
+                
+            
+            
+           
+           
         }
 
         public void UpdateEventDefs(Newtonsoft.Json.Linq.JObject eventDef)
@@ -113,3 +146,50 @@ namespace BMIT.DatabaseTools
 
     }
 }
+
+
+
+
+/*
+using(TransactionScope scope = new TransactionScope(TransactionScopeOptions.RequiresNew))
+{
+  ...
+  scope.Complete()
+}
+
+    public void Commit()
+    {
+        using (SQLiteConnection conn = new SQLiteConnection(this.connString))
+        {
+            conn.Open();
+            SQLiteTransaction trans = conn.BeginTransaction();
+            try
+            {
+                using (SQLiteCommand command = conn.CreateCommand())
+                {
+                    command.Transaction = trans; // Now the command is linked to the transaction and don't try to create a new one (which is probably why your database gets locked)
+                    command.CommandText = "INSERT OR IGNORE INTO [MY_TABLE] (col1, col2) VALUES (?,?)";
+
+                    command.Parameters.Add(this.col1Param);
+                    command.Parameters.Add(this.col2Param);
+
+                    foreach (Data o in this.dataTemp)
+                    {
+                        this.col1Param.Value = o.Col1Prop;
+                        this. col2Param.Value = o.Col2Prop;
+
+                        command.ExecuteNonQuery();
+                    }
+                }
+
+                trans.Commit();
+            }
+            catch (SQLiteException ex)
+            {
+                // You need to rollback in case something wrong happened in command.ExecuteNonQuery() ...
+                trans.Rollback();
+                throw;
+            }
+        }
+    }
+ */
