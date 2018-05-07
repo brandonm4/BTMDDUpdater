@@ -14,15 +14,8 @@ It does the following
     It creates or updates the UnitDef table using the values from the JSON.  This will allow you to change the values by changing the json and then running the update.
     It creates or updates the TagSetTag table.  If you remove MechTags from the JSON they will be removed from the db as well.
 
-    -Download from GitHub - https://github.com/brandonm4/BTMDDUpdater/releases/tag/v.01a
-    -Put all the mechdefs you want to update or import into one folder.
-    -Run the tool
-	--Go to Settings tab
-    --Change the first box (MechDefs Path) to point to the folder where you copied all your files.
-    --Change the second to point to your MetadataDatabase.md file. (In your games MDD folder).  It will make a backup before making any changes.
-    -Go to Basic Tab. Press the Start Import button.  Wait for it to say complete. (at bottom)           
-    --See if it worked and didn't blow up
-    -i have been able to load an existing game save (created on an unmodded game)
+   
+    -i have been able to load an existing game save (originally created on an unmodded game)
     -I have encountered the new mechs in the campaign contracts
     -I have been able to salvage them - I haven't collected a full mech yet
 
