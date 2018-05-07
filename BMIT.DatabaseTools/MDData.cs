@@ -10,18 +10,24 @@ namespace BMIT.DatabaseTools
 {
     public class MDData : IDisposable
     {
+        #region Private Vars
+        private static SqliteConnection db;
+        #endregion
+
+        #region Events
         public MDData(string pathToMdd)
         {
             db = new SqliteConnection("Filename=" + pathToMdd);
             db.Open();
         }
-        //~MDData()
-        //{
-        //    try { db.Close(); } catch { }
-        //}
-        private static SqliteConnection db;
+        public void Dispose()
+        {
+            try { db.Close(); } catch { }
+        }
+        #endregion
 
-        public void UpdateUnitDefs(Newtonsoft.Json.Linq.JObject unitDef, int defType = 1)
+        #region Update Defs
+        public void UpdateUnitDefs(Newtonsoft.Json.Linq.JObject unitDef, UnitType defType)
         {
             // db.Open();
             string tagSetID = "";
@@ -44,24 +50,66 @@ namespace BMIT.DatabaseTools
             //Now do insert/replace for supporting rows
             //UnitDef table    
             // INSERT INTO UnitDef('UnitDefID','FriendlyName','IconID','UnitTypeID','TagSetID','Cost') VALUES ('ID_from_mechdef','Name_from_mechdef','Icon_from_mech_def',1,'UUID_from_step_one',Cost_from_mech_def);
-            var cmd1 = new SqliteCommand("INSERT or REPLACE INTO UnitDef('UnitDefID', 'FriendlyName', 'IconID', 'UnitTypeID', 'TagSetID', 'Cost') " + "VALUES(" + "'" + unitDef["Description"]["Id"].ToString() + "', " + "'" + unitDef["Description"]["Name"].ToString() + "', " + "'" + unitDef["Description"]["Icon"].ToString() + "', " + defType.ToString() + ", " + "'" + tagSetID + "', " + unitDef["Description"]["Cost"].ToString() + ")", db);         
+            var cmd1 = new SqliteCommand("INSERT or REPLACE INTO UnitDef('UnitDefID', 'FriendlyName', 'IconID', 'UnitTypeID', 'TagSetID', 'Cost') " + "VALUES(" + "'" + unitDef["Description"]["Id"].ToString() + "', " + "'" + unitDef["Description"]["Name"].ToString() + "', " + "'" + unitDef["Description"]["Icon"].ToString() + "', " + ((int)defType).ToString() + ", " + "'" + tagSetID + "', " + unitDef["Description"]["Cost"].ToString() + ")", db);         
             cmd1.ExecuteReader();
+
 
             //TagSetTags - first clear out the old ones incase some were removed from def
             cmd1 = new SqliteCommand("Delete from TagSetTag where TagSetID = '" + tagSetID + "'", db);
             cmd1.ExecuteReader();
             //Now add them all back
-            foreach (var tag in unitDef["MechTags"]["items"])
+            switch(defType)
             {
-                cmd1.Parameters.Clear();
-                cmd1 = new SqliteCommand(" INSERT INTO TagSetTag('TagSetID','TagName') VALUES ('" + tagSetID + "', '" + tag.ToString() + "')", db);
-                cmd1.ExecuteReader();
-            }            
+                case UnitType.Mech:
+                    foreach (var tag in unitDef["MechTags"]["items"])
+                    {
+                        cmd1.Parameters.Clear();
+                        cmd1 = new SqliteCommand(" INSERT INTO TagSetTag('TagSetID','TagName') VALUES ('" + tagSetID + "', '" + tag.ToString() + "')", db);
+                        cmd1.ExecuteReader();
+                    }
+                    break;
+                case UnitType.Vehicle:
+                    foreach (var tag in unitDef["VehicleTags"]["items"])
+                    {
+                        cmd1.Parameters.Clear();
+                        cmd1 = new SqliteCommand(" INSERT INTO TagSetTag('TagSetID','TagName') VALUES ('" + tagSetID + "', '" + tag.ToString() + "')", db);
+                        cmd1.ExecuteReader();
+                    }
+                    break;
+            }
+             
+        }
+        #endregion
+
+        #region PlaceHolder/NotImplemented
+        /* Placeholder functions for now */
+        public void UpdateLanceDefs(Newtonsoft.Json.Linq.JObject lanceDef)
+        {
+            throw new NotImplementedException();
         }
 
-        public void Dispose()
+        public void UpdateEventDefs(Newtonsoft.Json.Linq.JObject eventDef)
         {
-            try { db.Close(); } catch { }
+            throw new NotImplementedException();
         }
+
+        public void UpdatePilotDefs(Newtonsoft.Json.Linq.JObject pilotDef)
+        {
+            throw new NotImplementedException();
+        }
+        public void UpdateRequirementDefs(Newtonsoft.Json.Linq.JObject reqDef)
+        {
+            throw new NotImplementedException();
+        }
+        public void UpdateUpgradeDefs(Newtonsoft.Json.Linq.JObject upgradeDef)
+        {
+            throw new NotImplementedException();
+        }
+        public void UpdateWeaponDefs(Newtonsoft.Json.Linq.JObject weaponDef)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
     }
 }

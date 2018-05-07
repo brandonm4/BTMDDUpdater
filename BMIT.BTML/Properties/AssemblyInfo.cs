@@ -14,10 +14,10 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BMIT.DatabaseTools")]
-[assembly: AssemblyDescription("BattleTech Metadata Import Tool Database Functions")]
+[assembly: AssemblyTitle("BMIT.BTML")]
+[assembly: AssemblyDescription("BattleTech Metadata Import Tool BTML Version")]
 [assembly: AssemblyCompany("Brandon Mathis")]
-[assembly: AssemblyProduct("BMIT.DatabaseTools")]
+[assembly: AssemblyProduct("BMIT.BTML")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -28,7 +28,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("fdb2458e-8249-412e-a4ec-351ca152194c")]
+[assembly: Guid("15afa708-3bf2-4acd-b075-5a5fde7535c5")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -39,6 +39,6 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.*")]
-
+//[assembly: AssemblyVersion("1.0.0.0")]
+//[assembly: AssemblyFileVersion("1.0.0.0")]

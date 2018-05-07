@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTMechDBUpdater", "BTMechDB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BMIT.DatabaseTools", "BMIT.DatabaseTools\BMIT.DatabaseTools.csproj", "{FDB2458E-8249-412E-A4EC-351CA152194C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BMIT.BTML", "BMIT.BTML\BMIT.BTML.csproj", "{15AFA708-3BF2-4ACD-B075-5A5FDE7535C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{FDB2458E-8249-412E-A4EC-351CA152194C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDB2458E-8249-412E-A4EC-351CA152194C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDB2458E-8249-412E-A4EC-351CA152194C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15AFA708-3BF2-4ACD-B075-5A5FDE7535C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15AFA708-3BF2-4ACD-B075-5A5FDE7535C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15AFA708-3BF2-4ACD-B075-5A5FDE7535C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15AFA708-3BF2-4ACD-B075-5A5FDE7535C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

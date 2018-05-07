@@ -39,6 +39,7 @@ namespace BTMechDBUpdater
 
             txtPath.Text = ConfigurationManager.AppSettings["DefaultMechDir"];
             txtMDD.Text = ConfigurationManager.AppSettings["DefaultMDDir"];
+            try { txtPath.Text = ConfigurationManager.AppSettings["DefaultVehicleDir"];  } catch { }
 
             this.Text = "BMIT - Version " + major + "." + minor + "." + build;
 
