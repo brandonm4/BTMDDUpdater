@@ -27,9 +27,6 @@ It does the following
     -I have been able to salvage them - I haven't collected a full mech yet
 
 
-I was able to add all of JK_Varients(https://www.nexusmods.com/battletech/mods/18) into the DB (I had to fix the json on one of the vindicators).  I am able to load my save and get into the campaign.  I'll play some now (for testing... ) to see if any of the new ones show up. Also, I had to reorder the csv entries (MoveDefs before Chassis before MechDefs) to get the game to load.
-Next up will be some more UI changes.
-
 Instructions
 
 
@@ -59,6 +56,7 @@ Instructions
 
     If this fails for any reason - restore your original db file. There will a file named MetadataDatabase.md-<TimeStamp>.bak in the same as the original. This is a copy from before any changes were made. Delete the existing MetadataDatabase.md and rename the .bak file to MetadataDatabase.md
 
-Another important thing is that make sure the mechs really work in skirmish before you do any of this. The files from JK_Varients did not work immediately for me right off the bat. I had to fix one of the files that was missing a comma, and I had to re-arrange the VersionManifest.csv entries for it to load. You can test this by doing a few things. First make sure the game loads to the main menu. (it originally stalled for me here with a black screen and 59 in the top corner) Second, once you are on the main menu, make sure you can start a skirmish game with any of the new mechs. (This part failed for me with it sitting in continual loading). Finally make sure you can load your existing campaign save. (Until I fixed the csv, the Continue button was greyed out). Make sure of all of this before you bother with my importer. Otherwise you will probably break your game.
+Another important thing is that make sure the mechs really work in skirmish before you do any of this.
+You can test this by doing a few things. First make sure the game loads to the main menu. (it originally stalled for me here with a black screen and 59 in the top corner) Second, once you are on the main menu, make sure you can start a skirmish game with any of the new mechs. (This part failed for me with it sitting in continual loading). Finally make sure you can load your existing campaign save. (Until I fixed the csv, the Continue button was greyed out). Make sure of all of this before you bother with my importer. Otherwise you will probably break your game.
 
-If you need help with the csv part, I can send you mine but basically I just made sure the movedefs came before the chassisdefs. And the chassisdefs came before the mechdefs in the file order. None of this is edited by my editor but you need a sound starting point for it to work correctly.
+
