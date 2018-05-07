@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums.cs" />
+    <Compile Include="LanceDef.cs" />
     <Compile Include="MDData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitDef.cs" />

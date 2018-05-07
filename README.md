@@ -23,7 +23,7 @@ It does the following
 Instructions
 
 
-    Go here: https://github.com/brandonm4/BTMDDUpdater/releases/tag/v.01a and download whatever the latest is - right now it's .05a but I'm updating it frequently
+    Go here: https://github.com/brandonm4/BTMDDUpdater/releases and download whatever the latest is - right now it's .05a but I'm updating it frequently
 
     Unzip it, it doesn't matter where - on your desktop is fine for now.
 

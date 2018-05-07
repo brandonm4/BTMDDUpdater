@@ -79,57 +79,157 @@ namespace BMIT.DatabaseTools
             }
              
         }
+
+        public void UpdateLanceDefs(Newtonsoft.Json.Linq.JObject lanceDef)
+        {
+            //SqliteTransaction trans = db.BeginTransaction();
+
+            try
+            {
+                string tagSetID = "";
+                using (var checkcmd = db.CreateCommand())
+                {
+                    checkcmd.CommandText = "Select * from LanceDef where LanceDefid = '" + lanceDef["Description"]["Id"] + "'";
+                    //checkcmd.Transaction = trans;
+                    using (var query = checkcmd.ExecuteReader())
+                    {
+                        if (query.HasRows)
+                        {
+                            // Do an update
+                            query.Read();
+                            tagSetID = query.GetString(3);
+                        }
+                        else
+                        {
+                            // Do an insert
+                            tagSetID = Guid.NewGuid().ToString();
+                            using (var cmd = db.CreateCommand())
+                            {
+                                //cmd.Transaction = trans;
+                                cmd.CommandText = "INSERT INTO TagSet('TagSetID','TagSetTypeID') VALUES ('" + tagSetID.ToString() + "'," + ((int)TagSetType.LanceDef).ToString() + ")";
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
+
+                using (var cmd1 = db.CreateCommand())
+                {
+                    //cmd1.Transaction = trans;
+                    cmd1.CommandText = "INSERT OR REPLACE INTO LanceDef('LanceDefID', FriendlyName, Difficulty,'TagSetID', 'Cost') VALUES ('" + lanceDef["Description"]["Id"].ToString() + "', '" + lanceDef["Description"]["Name"].ToString() + "', " + lanceDef["Difficulty"].ToString() + ", '" + tagSetID + "', " + lanceDef["Description"]["Cost"].ToString() + ")";
+                    cmd1.ExecuteNonQuery();
+
+                    cmd1.CommandText = "Delete from TagSetTag where TagSetID = '" + tagSetID + "'";
+                    cmd1.ExecuteNonQuery();
+
+                    foreach (var tag in lanceDef["LanceTags"]["items"])
+                    {
+                        cmd1.Parameters.Clear();
+                        cmd1.CommandText = " INSERT INTO TagSetTag('TagSetID','TagName') VALUES ('" + tagSetID + "', '" + tag.ToString() + "')";
+                        cmd1.ExecuteNonQuery();
+                    }
+                }
+                //trans.Commit();
+            }
+            catch (Exception ex)
+            {
+                //trans.Rollback();
+            }
+        }
+
+        public void UpdatePilotDefs(Newtonsoft.Json.Linq.JObject pilotDef)
+        {
+            try
+            {
+                string tagSetID = "";
+                using (var checkcmd = db.CreateCommand())
+                {
+                    checkcmd.CommandText = "Select * from PilotDef where PilotDefID = '" + pilotDef["Description"]["Id"] + "'";
+                    //checkcmd.Transaction = trans;
+                    using (var query = checkcmd.ExecuteReader())
+                    {
+                        if (query.HasRows)
+                        {
+                            // Do an update
+                            query.Read();
+                            tagSetID = query.GetString(3);
+                        }
+                        else
+                        {
+                            // Do an insert
+                            tagSetID = Guid.NewGuid().ToString();
+                            using (var cmd = db.CreateCommand())
+                            {
+                                //cmd.Transaction = trans;
+                                cmd.CommandText = "INSERT INTO TagSet('TagSetID','TagSetTypeID') VALUES ('" + tagSetID.ToString() + "'," + ((int)TagSetType.PilotDef).ToString() + ")";
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
+
+                using (var cmd1 = db.CreateCommand())
+                {
+                    //cmd1.Transaction = trans;
+                    cmd1.CommandText = "INSERT OR REPLACE INTO PilotDef('PilotDefID', 'FriendlyName', 'IconID','TagSetID', 'IsRonin') VALUES ('" + pilotDef["Description"]["Id"].ToString() + "', '" + pilotDef["Description"]["Name"].ToString() + "', '" + pilotDef["Description"]["Icon"].ToString() + "', '" + tagSetID + "', " + Convert.ToInt32(Convert.ToBoolean(pilotDef["IsRonin"].ToString())).ToString() + ")";
+                    cmd1.ExecuteNonQuery();
+
+                    cmd1.CommandText = "Delete from TagSetTag where TagSetID = '" + tagSetID + "'";
+                    cmd1.ExecuteNonQuery();
+
+                    foreach (var tag in pilotDef["PilotTags"]["items"])
+                    {
+                        cmd1.Parameters.Clear();
+                        cmd1.CommandText = " INSERT INTO TagSetTag('TagSetID','TagName') VALUES ('" + tagSetID + "', '" + tag.ToString() + "')";
+                        cmd1.ExecuteNonQuery();
+                    }
+                }
+                //trans.Commit();
+            }
+            catch (Exception ex)
+            {
+                //trans.Rollback();
+            }
+        }
+        #endregion
+
+        #region Select Defs
+        public List<UnitDef> GetUnitDefs(UnitType defType)
+        {
+            var lst = new List<UnitDef>();
+
+            using (var checkcmd = db.CreateCommand())
+            {
+                checkcmd.CommandText = "Select UnitDefID, FriendlyName, IconID, UnitTypeID, TagSetID, Cost from UnitDef where UnitTypeID = " + ((int)defType).ToString();
+                using (var query = checkcmd.ExecuteReader())
+                {
+                    while (query.Read())
+                    {
+                        lst.Add(new UnitDef() {
+                               UnitDefID = query.GetString(0),
+                               FriendlyName = query.GetString(1),
+                               IconID = query.GetString(2),
+                               UnitType = (UnitType)query.GetInt32(3),
+                               TagSetID = query.GetString(4),
+                               Cost = query.GetInt32(5),
+                        });
+                    }
+                }
+            }
+            return lst;
+        }
         #endregion
 
         #region PlaceHolder/NotImplemented
         /* Placeholder functions for now */
-        public void UpdateLanceDefs(Newtonsoft.Json.Linq.JObject lanceDef)
-        {
-            SqliteTransaction trans = db.BeginTransaction();
-            string tagSetID = "";
-            using (var checkcmd = db.CreateCommand())
-            {
-                checkcmd.CommandText = "Select * from LanceDef where LanceDefid = '" + lanceDef["Description"]["Id"] + "'";
-                checkcmd.Transaction = trans;
-                using (var query = checkcmd.ExecuteReader())
-                {
-                    if (query.HasRows)
-                    {
-                        // Do an update
-                        query.Read();
-                        tagSetID = query.GetString(4);
-                    }
-                    else
-                    {
-                        // Do an insert
-                        tagSetID = Guid.NewGuid().ToString();
-                        using (var cmd = db.CreateCommand())
-                        {
-                            cmd.Transaction = trans;
-                            cmd.CommandText = "INSERT INTO TagSet('TagSetID','TagSetTypeID') VALUES ('" + tagSetID.ToString() + "'," + ((int)TagSetType.LanceDef).ToString() + ")";
-                            cmd.ExecuteNonQuery();
-                        }                                                  
-                    }
-                }
-
-
-            }
-                
-            
-            
-           
-           
-        }
+        
 
         public void UpdateEventDefs(Newtonsoft.Json.Linq.JObject eventDef)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdatePilotDefs(Newtonsoft.Json.Linq.JObject pilotDef)
-        {
-            throw new NotImplementedException();
-        }
+       
         public void UpdateRequirementDefs(Newtonsoft.Json.Linq.JObject reqDef)
         {
             throw new NotImplementedException();
