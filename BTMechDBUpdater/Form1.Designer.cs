@@ -48,17 +48,19 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btnSaveConfig = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtVehiclePath = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -74,14 +76,14 @@
             // 
             // txtPath
             // 
-            this.txtPath.Location = new System.Drawing.Point(120, 21);
+            this.txtPath.Location = new System.Drawing.Point(120, 41);
             this.txtPath.Name = "txtPath";
             this.txtPath.Size = new System.Drawing.Size(587, 20);
             this.txtPath.TabIndex = 1;
             // 
             // txtMDD
             // 
-            this.txtMDD.Location = new System.Drawing.Point(120, 47);
+            this.txtMDD.Location = new System.Drawing.Point(120, 15);
             this.txtMDD.Name = "txtMDD";
             this.txtMDD.Size = new System.Drawing.Size(587, 20);
             this.txtMDD.TabIndex = 2;
@@ -89,7 +91,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 50);
+            this.label1.Location = new System.Drawing.Point(22, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 13);
             this.label1.TabIndex = 3;
@@ -98,7 +100,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(22, 24);
+            this.label2.Location = new System.Drawing.Point(22, 44);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(81, 13);
             this.label2.TabIndex = 4;
@@ -220,6 +222,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label6);
+            this.tabPage1.Controls.Add(this.txtVehiclePath);
             this.tabPage1.Controls.Add(this.btnSaveConfig);
             this.tabPage1.Controls.Add(this.checkBox1);
             this.tabPage1.Controls.Add(this.label2);
@@ -236,7 +240,7 @@
             // 
             // btnSaveConfig
             // 
-            this.btnSaveConfig.Location = new System.Drawing.Point(120, 110);
+            this.btnSaveConfig.Location = new System.Drawing.Point(120, 155);
             this.btnSaveConfig.Name = "btnSaveConfig";
             this.btnSaveConfig.Size = new System.Drawing.Size(101, 23);
             this.btnSaveConfig.TabIndex = 11;
@@ -249,12 +253,31 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Checked = true;
             this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(120, 73);
+            this.checkBox1.Location = new System.Drawing.Point(120, 118);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(186, 17);
             this.checkBox1.TabIndex = 10;
             this.checkBox1.Text = "Create a backup of the original db";
             this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.richTextBox1);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(792, 549);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "Help";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(8, 3);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(781, 512);
+            this.richTextBox1.TabIndex = 0;
+            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
             // 
             // statusStrip1
             // 
@@ -279,24 +302,21 @@
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(200, 17);
             this.toolStripStatusLabel1.Text = "Ready";
             // 
-            // tabPage4
+            // label6
             // 
-            this.tabPage4.Controls.Add(this.richTextBox1);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(792, 549);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Help";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(22, 70);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(89, 13);
+            this.label6.TabIndex = 13;
+            this.label6.Text = "VehicleDefs Path";
             // 
-            // richTextBox1
+            // txtVehiclePath
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(8, 3);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(781, 512);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
+            this.txtVehiclePath.Location = new System.Drawing.Point(120, 67);
+            this.txtVehiclePath.Name = "txtVehiclePath";
+            this.txtVehiclePath.Size = new System.Drawing.Size(587, 20);
+            this.txtVehiclePath.TabIndex = 12;
             // 
             // Form1
             // 
@@ -314,9 +334,9 @@
             this.tabPage2.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.tabPage4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -348,6 +368,8 @@
         private System.Windows.Forms.Button btnSaveConfig;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtVehiclePath;
     }
 }
 

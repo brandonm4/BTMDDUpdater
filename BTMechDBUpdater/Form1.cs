@@ -45,6 +45,7 @@ namespace BTMechDBUpdater
 #if DEBUG
             txtMDD.Text = @"C:/Development/Brandon/btmods/BTMechDBUpdater/BTMechDBUpdater/test/MetadataDatabase.db";
             txtPath.Text = @"C:/Development/Brandon/btmods/BTMechDBUpdater/BTMechDBUpdater/test/mechs";
+            txtVehiclePath.Text = @"C:\Development\Brandon\btmods\BTMechDBUpdater\BTMechDBUpdater\test\vehicle";
 #endif
         }
 
@@ -116,19 +117,22 @@ namespace BTMechDBUpdater
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var files = Directory.GetFiles(txtPath.Text);
-            toolStripProgressBar1.Minimum = 0;
-            toolStripProgressBar1.Maximum = files.Length;
-            toolStripProgressBar1.Value = 0;
-
-            toolStripStatusLabel1.Text = "Processing files...";
+            
             if (File.Exists(txtMDD.Text))
             {
                 File.Copy(txtMDD.Text, txtMDD.Text + "-Backup-" + DateTime.Now.ToString("yyyyMMddhhmmss.bak"), false);
             }
 
+
+            
             using (var mdData = new BMIT.DatabaseTools.MDData(txtMDD.Text))
             {
+                var files = Directory.GetFiles(txtPath.Text);
+                toolStripProgressBar1.Minimum = 0;
+                toolStripProgressBar1.Maximum = files.Length;
+                toolStripProgressBar1.Value = 0;
+
+                toolStripStatusLabel1.Text = "Processing mechs...";
 
                 Application.DoEvents();
 
@@ -138,7 +142,27 @@ namespace BTMechDBUpdater
                     {
                         var mechdef = LoadMechDef(f);
                         //UpdateDB(mechdef, db);
-                        mdData.UpdateUnitDefs(mechdef, (int)UnitType.Mech);
+                        mdData.UpdateUnitDefs(mechdef, UnitType.Mech);
+                    }
+                    toolStripProgressBar1.Value++;
+                    Application.DoEvents();
+                }
+
+                files = Directory.GetFiles(txtVehiclePath.Text);
+                toolStripProgressBar1.Minimum = 0;
+                toolStripProgressBar1.Maximum = files.Length;
+                toolStripProgressBar1.Value = 0;
+
+                toolStripStatusLabel1.Text = "Processing vehicles...";
+                Application.DoEvents();
+
+                foreach (var f in files)
+                {
+                    if (f.EndsWith("json"))
+                    {
+                        var def = LoadMechDef(f);
+                        //UpdateDB(mechdef, db);
+                        mdData.UpdateUnitDefs(def, UnitType.Vehicle);
                     }
                     toolStripProgressBar1.Value++;
                     Application.DoEvents();
@@ -156,6 +180,7 @@ namespace BTMechDBUpdater
            
             AddOrUpdateAppSettings("DefaultMechDir", txtPath.Text);
             AddOrUpdateAppSettings("DefaultMDDir", txtMDD.Text);
+            AddOrUpdateAppSettings("DefaultVehicleDir", txtVehiclePath.Text);
         }
 
         public static void AddOrUpdateAppSettings(string key, string value)
