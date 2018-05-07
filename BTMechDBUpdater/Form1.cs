@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BMIT.DatabaseTools;
 using Microsoft.Data.Sqlite;
 
 
@@ -137,7 +138,7 @@ namespace BTMechDBUpdater
                     {
                         var mechdef = LoadMechDef(f);
                         //UpdateDB(mechdef, db);
-                        mdData.UpdateUnitDefs(mechdef, 1);
+                        mdData.UpdateUnitDefs(mechdef, (int)UnitType.Mech);
                     }
                     toolStripProgressBar1.Value++;
                     Application.DoEvents();
