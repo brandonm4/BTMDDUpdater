@@ -28,10 +28,11 @@ namespace BTMechDBUpdater
         /// </summary>
         private void InitializeComponent()
         {
-            Telerik.WinControls.UI.RadListDataItem radListDataItem1 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem2 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem3 = new Telerik.WinControls.UI.RadListDataItem();
-            Telerik.WinControls.UI.RadListDataItem radListDataItem4 = new Telerik.WinControls.UI.RadListDataItem();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem6 = new Telerik.WinControls.UI.RadListDataItem();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem7 = new Telerik.WinControls.UI.RadListDataItem();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem8 = new Telerik.WinControls.UI.RadListDataItem();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem9 = new Telerik.WinControls.UI.RadListDataItem();
+            Telerik.WinControls.UI.RadListDataItem radListDataItem10 = new Telerik.WinControls.UI.RadListDataItem();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new Telerik.WinControls.UI.RadButton();
             this.lblComplete = new Telerik.WinControls.UI.RadLabel();
@@ -52,6 +53,8 @@ namespace BTMechDBUpdater
             this.statusStrip1 = new Telerik.WinControls.UI.RadStatusStrip();
             this.toolStripProgressBar1 = new Telerik.WinControls.UI.RadProgressBarElement();
             this.toolStripStatusLabel1 = new Telerik.WinControls.UI.RadLabelElement();
+            this.radPageViewPage1 = new Telerik.WinControls.UI.RadPageViewPage();
+            this.radButton1 = new Telerik.WinControls.UI.RadButton();
             ((System.ComponentModel.ISupportInitialize)(this.button1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lblComplete)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl1)).BeginInit();
@@ -70,6 +73,7 @@ namespace BTMechDBUpdater
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.richTextBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusStrip1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radButton1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -96,6 +100,7 @@ namespace BTMechDBUpdater
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.radPageViewPage1);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -105,6 +110,7 @@ namespace BTMechDBUpdater
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.radButton1);
             this.tabPage2.Controls.Add(this.cbOnlyNew);
             this.tabPage2.Controls.Add(this.ddlDefType);
             this.tabPage2.Controls.Add(this.label8);
@@ -129,14 +135,16 @@ namespace BTMechDBUpdater
             // 
             // ddlDefType
             // 
-            radListDataItem1.Text = "MechDef";
-            radListDataItem2.Text = "VehicleDef";
-            radListDataItem3.Text = "LanceDef";
-            radListDataItem4.Text = "PilotDef";
-            this.ddlDefType.Items.Add(radListDataItem1);
-            this.ddlDefType.Items.Add(radListDataItem2);
-            this.ddlDefType.Items.Add(radListDataItem3);
-            this.ddlDefType.Items.Add(radListDataItem4);
+            radListDataItem6.Text = "MechDef";
+            radListDataItem7.Text = "VehicleDef";
+            radListDataItem8.Text = "LanceDef";
+            radListDataItem9.Text = "PilotDef";
+            radListDataItem10.Text = "SimGameEventDef";
+            this.ddlDefType.Items.Add(radListDataItem6);
+            this.ddlDefType.Items.Add(radListDataItem7);
+            this.ddlDefType.Items.Add(radListDataItem8);
+            this.ddlDefType.Items.Add(radListDataItem9);
+            this.ddlDefType.Items.Add(radListDataItem10);
             this.ddlDefType.Location = new System.Drawing.Point(249, 5);
             this.ddlDefType.Name = "ddlDefType";
             this.ddlDefType.Size = new System.Drawing.Size(121, 20);
@@ -181,17 +189,17 @@ namespace BTMechDBUpdater
             this.tabPage1.Controls.Add(this.txtGamePath);
             this.tabPage1.Controls.Add(this.btnSaveConfig);
             this.tabPage1.ItemSize = new System.Drawing.SizeF(56F, 28F);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(10, 37);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(792, 549);
+            this.tabPage1.Size = new System.Drawing.Size(779, 527);
             this.tabPage1.Text = "Settings";
             // 
             // label7
             // 
             this.label7.Location = new System.Drawing.Point(22, 24);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(60, 13);
+            this.label7.Size = new System.Drawing.Size(61, 18);
             this.label7.TabIndex = 15;
             this.label7.Text = "Game Path";
             // 
@@ -214,17 +222,19 @@ namespace BTMechDBUpdater
             // 
             this.tabPage4.Controls.Add(this.richTextBox1);
             this.tabPage4.ItemSize = new System.Drawing.SizeF(40F, 28F);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Location = new System.Drawing.Point(10, 37);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(792, 549);
+            this.tabPage4.Size = new System.Drawing.Size(779, 527);
             this.tabPage4.Text = "Help";
             // 
             // richTextBox1
             // 
+            this.richTextBox1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(156)))), ((int)(((byte)(189)))), ((int)(((byte)(232)))));
             this.richTextBox1.IsReadOnly = true;
             this.richTextBox1.LayoutMode = Telerik.WinForms.Documents.Model.DocumentLayoutMode.Flow;
             this.richTextBox1.Location = new System.Drawing.Point(8, 3);
             this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.SelectionFill = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(78)))), ((int)(((byte)(158)))), ((int)(((byte)(255)))));
             this.richTextBox1.Size = new System.Drawing.Size(781, 512);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
@@ -266,6 +276,23 @@ namespace BTMechDBUpdater
             this.toolStripStatusLabel1.Text = "Ready";
             this.toolStripStatusLabel1.TextWrap = true;
             // 
+            // radPageViewPage1
+            // 
+            this.radPageViewPage1.ItemSize = new System.Drawing.SizeF(37F, 28F);
+            this.radPageViewPage1.Location = new System.Drawing.Point(10, 37);
+            this.radPageViewPage1.Name = "radPageViewPage1";
+            this.radPageViewPage1.Size = new System.Drawing.Size(779, 527);
+            this.radPageViewPage1.Text = "Test";
+            // 
+            // radButton1
+            // 
+            this.radButton1.Location = new System.Drawing.Point(376, 105);
+            this.radButton1.Name = "radButton1";
+            this.radButton1.Size = new System.Drawing.Size(101, 44);
+            this.radButton1.TabIndex = 11;
+            this.radButton1.Text = "View";
+            this.radButton1.Click += new System.EventHandler(this.radButton1_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -300,6 +327,7 @@ namespace BTMechDBUpdater
             this.tabPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.richTextBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.statusStrip1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.radButton1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -327,6 +355,8 @@ namespace BTMechDBUpdater
         private Telerik.WinControls.UI.RadDropDownList ddlDefType;
         private Telerik.WinControls.UI.RadLabel label8;
         private Telerik.WinControls.UI.RadCheckBox cbOnlyNew;
+        private Telerik.WinControls.UI.RadPageViewPage radPageViewPage1;
+        private Telerik.WinControls.UI.RadButton radButton1;
     }
 }
 

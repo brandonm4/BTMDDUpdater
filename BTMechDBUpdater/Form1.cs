@@ -90,6 +90,8 @@ namespace BTMechDBUpdater
                             case "PilotDef":
                                 mdData.UpdatePilotDefs((JObject)def.Tag);
                                 break;
+                            case "SimGameEventDef":
+                                break;
                             default:
                                 MessageBox.Show("Only Mech, Vehicles, Pilot and Lances are currently supported.  Other types are coming soon.");
                                 break;
@@ -371,6 +373,18 @@ namespace BTMechDBUpdater
             catch (ConfigurationErrorsException)
             {
                 Console.WriteLine("Error writing app settings");
+            }
+        }
+
+        private void radButton1_Click(object sender, EventArgs e)
+        {
+            if (lbMechDefs.SelectedItems.Count > 0)
+            {
+                if (lbMechDefs.SelectedItems.First().Tag != null)
+                {
+                    var frm = new DefViewer((JObject)lbMechDefs.SelectedItems.First().Tag);
+                    frm.ShowDialog();
+                }
             }
         }
     }
